@@ -25,6 +25,7 @@ public class UserService {
 
     /**
      * Delete an existing user account from the platform
+     *
      * @param id = userID
      * @return
      */
@@ -33,5 +34,18 @@ public class UserService {
 
         return responseEntity;
     }
+
+    /**
+     * update the existing user profile
+     *
+     * @param user
+     * @return reponse entity with the relevant return code
+     */
+    public ResponseEntity<String> updateUser(User user) {
+        ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+
+        return responseEntity;
+    }
+    
 
 }
