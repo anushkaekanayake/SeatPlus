@@ -1,4 +1,4 @@
-package com.seatplus.controllers;
+package org.seatplus.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
