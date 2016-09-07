@@ -17,7 +17,7 @@ public class UserService {
      * @return
      */
     public ResponseEntity<String> addUser(User user) {
-        ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+        ResponseEntity<String> responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         //if success response entity will be assigned a created http status
         return responseEntity;
@@ -30,7 +30,7 @@ public class UserService {
      * @return
      */
     public ResponseEntity<String> removeUser(int id) {
-        ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+        ResponseEntity<String> responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         return responseEntity;
     }
@@ -42,7 +42,7 @@ public class UserService {
      * @return reponse entity with the relevant return code
      */
     public ResponseEntity<String> updateUser(User user) {
-        ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+        ResponseEntity<String> responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         return responseEntity;
     }
