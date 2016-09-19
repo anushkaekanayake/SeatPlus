@@ -1,4 +1,4 @@
-package org.seatplus.Services;
+package com.seatplus.services;
 
 /**
  * Created by anushka.ekanayake on 9/7/2016.

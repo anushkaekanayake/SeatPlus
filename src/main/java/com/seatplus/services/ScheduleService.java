@@ -1,6 +1,6 @@
-package org.seatplus.Services;
+package com.seatplus.services;
 
-import org.seatplus.models.Schedule;
+import com.seatplus.models.Schedule;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

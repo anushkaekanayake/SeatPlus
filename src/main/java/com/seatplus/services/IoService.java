@@ -1,6 +1,6 @@
-package org.seatplus.Services;
+package com.seatplus.services;
 
-import org.seatplus.Utils.Constants;
+import com.seatplus.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;

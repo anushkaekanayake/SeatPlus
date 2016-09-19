@@ -1,13 +1,13 @@
-package org.seatplus.controllers;
+package com.seatplus.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by anushka.ekanayake on 9/4/2016.
- * Reservation, accept bookings, cancel booking, reject bookings
+ * Search under different criteria
  */
 @RestController
-@RequestMapping("/reservation")
-public class BookingController {
+@RequestMapping("/search")
+public class SearchController {
 }
