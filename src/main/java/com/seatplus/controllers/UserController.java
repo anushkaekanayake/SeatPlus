@@ -4,10 +4,7 @@ import com.seatplus.models.User;
 import com.seatplus.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -27,8 +24,20 @@ public class UserController {
      * @return response entity with return code
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<String> addUser(@RequestBody User userObj) {
+    public ResponseEntity<Object> addUser(@RequestBody User userObj) {
         return userService.addUser(userObj);
     }
+
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public ResponseEntity<String> updateUser(@RequestBody User userObj) {
+        return userService.updateUser(userObj);
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<String> deleteUser(@PathVariable int id) {
+        return userService.removeUser(id);
+    }
+
+
 }
 

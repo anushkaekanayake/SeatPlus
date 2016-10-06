@@ -16,3 +16,4 @@ com\seatplus\services\UserService.class
 com\seatplus\models\Bus.class
 com\seatplus\models\Schedule.class
 com\seatplus\SeatPlusApplication.class
+com\seatplus\utils\Messenger.class

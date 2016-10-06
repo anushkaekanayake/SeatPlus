@@ -2,14 +2,13 @@ package com.seatplus.services;
 
 import com.seatplus.models.User;
 import com.seatplus.repository.UserRepository;
+import com.seatplus.utils.Messenger;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * Created by anushka.ekanayake on 9/5/2016.
@@ -29,19 +28,24 @@ public class UserService {
      * @return
      */
     @Transactional
-    public ResponseEntity<String> addUser(User user) {
-        ResponseEntity<String> responseEntity;
+    public ResponseEntity<Object> addUser(User user) {
+        ResponseEntity<Object> responseEntity;
         try {
-            userRepository.save(user);
-            responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
+            //check in the db, whether this user is exist
+            User userExisting = userRepository.findOne(user.getUser_id());
+            if (userExisting != null) {
+                //this user is existing
+                Messenger messenger =new Messenger("This user is already exist");
+                responseEntity = new ResponseEntity<>(messenger, HttpStatus.BAD_REQUEST);
+
+            } else {
+                userRepository.save(user);
+                responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
+            }
         } catch (HibernateException ex) {
+            responseEntity = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             ex.printStackTrace();
         }
-
-        responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
-
-
-        //if success response entity will be assigned a created http status
         return responseEntity;
     }
 
@@ -49,10 +53,18 @@ public class UserService {
      * Delete an existing User account from the platform
      *
      * @param id = userID
-     * @return
+     * @return response entity with the return code
      */
+    @Transactional
     public ResponseEntity<String> removeUser(int id) {
-        ResponseEntity<String> responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        ResponseEntity<String> responseEntity;
+        try {
+            userRepository.delete(id);
+            responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        } catch (HibernateException ex) {
+            responseEntity = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            ex.printStackTrace();
+        }
 
         return responseEntity;
     }
@@ -60,11 +72,20 @@ public class UserService {
     /**
      * update the existing User profile
      *
-     * @param User
-     * @return reponse entity with the relevant return code
+     * @param user
+     * @return response entity with the relevant return code
      */
-    public ResponseEntity<String> updateUser(User User) {
-        ResponseEntity<String> responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    @Transactional
+    public ResponseEntity<String> updateUser(User user) {
+        ResponseEntity<String> responseEntity;
+
+        try {
+            userRepository.save(user);
+            responseEntity = new ResponseEntity<>(HttpStatus.OK);
+        } catch (HibernateException ex) {
+            responseEntity = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            ex.printStackTrace();
+        }
 
         return responseEntity;
     }
