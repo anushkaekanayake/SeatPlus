@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 public class ScheduleService {
 
     /**
-     * add new schedule to the matching user (new bus adding)
+     * add new schedule to the matching User (new bus adding)
      *
      * @param schedule schedule Object
      * @return responseEntity

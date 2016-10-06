@@ -1,33 +1,28 @@
 package com.seatplus.models;
 
-
-
-
 import javax.persistence.*;
 
 /**
  * Created by anushka.ekanayake on 9/5/2016.
  */
 @Entity
-@Table(name = "user")
+@Table(name = "User")
 public class User {
     @Id
-    @Column(name = "userId")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
-    @Column(name ="user_name")
+    private Integer user_id;
+    
     private String user_name;
-    @Column(name = "password")
+
     private String password;
-    @Column(name = "email")
+
     private String email;
 
-    public int getUserId() {
-        return userId;
+    public Integer getUser_id() {
+        return user_id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
     public String getUser_name() {

@@ -2,10 +2,12 @@ package com.seatplus.services;
 
 import com.seatplus.models.User;
 import com.seatplus.repository.UserRepository;
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,39 +17,36 @@ import java.util.List;
  */
 @Service
 public class UserService {
-@Autowired
+
+
+    @Autowired
     UserRepository userRepository;
 
-    public void testService(){
-        /*User user=new User();
-        user.setUserId(2);
-        user.setUser_name("user2");
-        user.setPassword("user2_pw");
-        user.setEmail("user2@stp.com");
-        userRepository.save(user);*/
-        System.out.println("++++++++++++++++++++++");
-        List<User> userList=userRepository.findAll();
-        for (User obj:userList) {
-            System.out.println(obj.getEmail().toString());
-        }
-
-    }
-
     /**
-     * Add new user to the platform
+     * Add new User to the platform
      *
      * @param user
      * @return
      */
+    @Transactional
     public ResponseEntity<String> addUser(User user) {
-        ResponseEntity<String> responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        ResponseEntity<String> responseEntity;
+        try {
+            userRepository.save(user);
+            responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+
+        responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
+
 
         //if success response entity will be assigned a created http status
         return responseEntity;
     }
 
     /**
-     * Delete an existing user account from the platform
+     * Delete an existing User account from the platform
      *
      * @param id = userID
      * @return
@@ -59,16 +58,16 @@ public class UserService {
     }
 
     /**
-     * update the existing user profile
+     * update the existing User profile
      *
-     * @param user
+     * @param User
      * @return reponse entity with the relevant return code
      */
-    public ResponseEntity<String> updateUser(User user) {
+    public ResponseEntity<String> updateUser(User User) {
         ResponseEntity<String> responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         return responseEntity;
     }
-    
+
 
 }
